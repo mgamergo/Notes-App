@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         "text-paragraph": "#e3e3e3",
+        "background" : "#030712",
       }
     },
   },

@@ -6,9 +6,9 @@ import Sidebar from "./Sidebar/Sidebar";
 import AddNoteForm from "./AddNoteForm";
 import Note from "./Note";
 import OpenNote from "./OpenNote";
-import DisplayNotes from "./DisplayNotes";
 import Login from "./Login";
 import Signup from "./Signup";
+import DisplayNotes from "./DisplayNotes";
 
 export {
   AddButton,
@@ -19,7 +19,7 @@ export {
   AddNoteForm,
   Note,
   OpenNote,
-  DisplayNotes,
   Login,
   Signup,
+  DisplayNotes,
 };

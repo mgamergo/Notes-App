@@ -2,15 +2,20 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
 function Note({ note }) {
-  const { title, content, color = "#030712", tags = [] } = note;
+  const { $id, Title, Content, Color = "#030712", tags = [], isArchived, isTrashed } = note;
+
+  const clicked = () => {
+    console.log($id)
+  }
 
   return (
     <li
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: Color }}
       className={`text-white p-5 py-8 pb-3 rounded-lg flex-col justify-center items-center max-w-60  border border-gray-500 list-none hover:shadow-black hover:shadow-lg`}
+      onClick={clicked}
     >
-      <h3 className="text-lg font-bold pb-5 text-white">{title}</h3>
-      <p className="text-text-paragraph mb-8">{content}</p>
+      <h3 className="text-lg font-bold pb-5 text-white">{Title}</h3>
+      <p className="text-text-paragraph mb-8">{Content}</p>
       <ul className="flex gap-1 items-center mt-3">
         {tags.map((tag, index) => (
           <li

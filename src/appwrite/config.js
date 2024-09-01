@@ -85,11 +85,12 @@ export class DataService {
     }
   }
 
-  async getAllNotes() {
+  async getAllNotes(query = []) {
     try {
       const response = await this.databases.listDocuments(
         conf.appwriteDatabaseId,
-        conf.appwriteCollectionId
+        conf.appwriteCollectionId,
+        query
       );
       return response.documents;
     } catch (error) {

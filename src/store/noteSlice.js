@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = []
+const initialState = {
+  fullData: [],
+  renderData: [],
+};
 
 const noteSlice = createSlice({
-    name: "note",
-    initialState,
-    reducers: {
-        setData: (state, action) => {
-            state = action.payload.noteData
-        }
-    }
-})
+  name: "note",
+  initialState,
+  reducers: {
+    setFullData: (state, action) => {
+      state.fullData = action.payload.noteData;
+    },
+    setRenderData: (state, action) => {
+      state.renderData = action.payload.noteData;
+    },
+  },
+});
 
-export const {setData} = noteSlice.actions
+export const { setFullData, setRenderData } = noteSlice.actions;
 
-export default noteSlice.reducer
+export default noteSlice.reducer;
