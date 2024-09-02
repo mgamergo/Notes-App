@@ -8,7 +8,7 @@ import { makeInvisible } from "../store/addNoteDisplaySlice";
 function AddNoteForm() {
   const dispatch = useDispatch();
   const fullData = useSelector((state) => state.note.fullData);
-  const userId = useSelector(state => state.auth.userData)
+  const userId = useSelector((state) => state.auth.userData);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -22,22 +22,22 @@ function AddNoteForm() {
   });
 
   const cancel = () => {
-    reset()
+    reset();
     dispatch(makeInvisible());
-  }
+  };
 
   const submit = async (data) => {
     try {
-      const addNote = await dataService.addNote({...data, userId: userId});
+      const addNote = await dataService.addNote({ ...data, userId: userId });
 
-      if (addNote) {     
-        const {$id} = addNote   
+      if (addNote) {
+        const { $id } = addNote;
         dispatch(makeInvisible());
 
         // Update Redux state and trigger re-render
         const updatedData = [...fullData, { ...data, $id: $id }];
-        dispatch(setFullData({noteData: updatedData}));
-        dispatch(setRenderData({noteData: updatedData}));
+        dispatch(setFullData({ noteData: updatedData }));
+        dispatch(setRenderData({ noteData: updatedData }));
 
         reset();
       }
@@ -70,11 +70,46 @@ function AddNoteForm() {
           />
         </div>
 
+        <div className="flex flex-col mb-5">
+          <label className="text-white mb-2">Select Background Color</label>
+          <div className="flex gap-3">
+            <label className="cursor-pointer">
+              <input 
+                type="radio" 
+                value="#030712" 
+                {...register("Color")} 
+                className="hidden peer" 
+              />
+              <span className="w-8 h-8 bg-gray-900 block rounded-full border-2 border-transparent peer-checked:border-white hover:border-white transition-all duration-300"></span>
+            </label>
+            <label className="cursor-pointer">
+              <input 
+                type="radio" 
+                value="#073317" 
+                {...register("Color")} 
+                className="hidden peer" 
+              />
+              <span className="w-8 h-8 bg-green-700 block rounded-full border-2 border-transparent peer-checked:border-white hover:border-white transition-all duration-300"></span>
+            </label>
+            <label className="cursor-pointer">
+              <input 
+                type="radio" 
+                value="#7d5b04" 
+                {...register("Color")} 
+                className="hidden peer" 
+              />
+              <span className="w-8 h-8 bg-yellow-500 block rounded-full border-2 border-transparent peer-checked:border-white hover:border-white transition-all duration-300"></span>
+            </label>
+          </div>
+        </div>
+
         <div className="flex justify-start items-center gap-3">
           <button type="submit" className="bg-green-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-green-700 hover:text-white cursor-pointer">
             Add
           </button>
-          <button type='button' onClick = {cancel} className="bg-red-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-red-700 hover:text-white cursor-pointer">Cancel</button>
+          <button type="button" onClick={cancel} className="bg-red-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-red-700 hover:text-white cursor-pointer">
+            Cancel
+          </button>
         </div>
 
       </form>
