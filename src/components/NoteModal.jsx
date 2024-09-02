@@ -5,7 +5,7 @@ import dataService from "../appwrite/config";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullData, setRenderData } from "../store/noteSlice";
 
-function NoteModal({ note, clicked }) {
+function NoteModal({ note, clicked, deleteNote, archiveNote }) {
   const { $id, Title, Content, Color = "#030712", tags = [] } = note;
   const noteData = useSelector(state => state.note.fullData)
   const renderNoteData = useSelector(state => state.note.renderData)
@@ -16,14 +16,16 @@ function NoteModal({ note, clicked }) {
     clicked();
   };
 
-  const deleteClicked = async () => {
-    const result = await dataService.deleteNote($id)
-    if (result) {
-      const newData = noteData.filter(item => item.$id != $id)
-      const newRenderData = renderNoteData.filter(item => item.$id != $id)
-      dispatch(setFullData({noteData: newData}))
-      dispatch(setRenderData({noteData: newRenderData}))
-    }
+  const deleteClicked = async (e) => {
+    e.stopPropagation()
+    deleteNote()
+    clicked()
+  }
+
+  const archiveClicked = (e) => {
+    e.stopPropagation()
+    archiveNote()
+    clicked()
   }
 
   return (
@@ -58,6 +60,11 @@ function NoteModal({ note, clicked }) {
         <div className="w-full flex justify-center items-center gap-3">
           <button className="bg-green-900 w-20 text-white inline-flex justify-center py-2 rounded-md transition-all duration-300 hover:bg-green-700 hover:text-text-paragraph">
             Edit
+          </button>
+          <button className="inline-flex justify-center w-20 text-left py-2 text-white rounded-md bg-blue-900 hover:blue-red-700 focus:bg-blue-700"
+            onClick={archiveClicked}
+          >
+            Archive
           </button>
           <button className="inline-flex justify-center w-20 text-left py-2 text-white rounded-md bg-red-900 hover:bg-red-700 focus:bg-red-700"
             onClick={deleteClicked}

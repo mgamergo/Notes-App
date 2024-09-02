@@ -1,5 +1,5 @@
 import React from "react";
-import { AddButton, Profile, SearchBar } from "../index";
+import { AddButton, Profile, SearchBar, CloseSessions } from "../index";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -18,6 +18,7 @@ function Header() {
 
       {!authStatus ? (
         <div className="flex items-center gap-4">
+          <CloseSessions />
           <Link to='/login'>
             <button className="px-4 py-2 rounded-md border outline-none font-bold transition-all duration-300 border-green-700 hover:bg-gray-900">
               Log In

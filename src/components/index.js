@@ -10,6 +10,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import DisplayNotes from "./DisplayNotes";
 import NoteModal from "./NoteModal";
+import CloseSessions from "./CloseSessions";
 
 export {
   AddButton,
@@ -23,5 +24,6 @@ export {
   Login,
   Signup,
   DisplayNotes,
-  NoteModal
+  NoteModal,
+  CloseSessions
 };

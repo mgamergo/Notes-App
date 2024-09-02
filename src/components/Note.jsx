@@ -1,13 +1,24 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {NoteModal} from './index'
+import { useDispatch, useSelector } from "react-redux";
+import { setArchive, setDelete, setFullData, setRenderData } from "../store/noteSlice";
 
 function Note({ note }) {
   const [isNoteOpened, setIsNoteOpened] = useState(false)
   const { $id, Title, Content, Color = "#030712", tags = [], isArchived, isTrashed, userId } = note;
+  const dispatch = useDispatch()
 
   const clicked = () => {
     setIsNoteOpened(prev => !prev)
+  }
+
+  const deleteNote = () => { 
+    dispatch(setDelete({$id: $id}))
+  }
+
+  const archiveNote = () => {
+    dispatch(setArchive({$id: $id}))
   }
 
   return (
@@ -36,7 +47,7 @@ function Note({ note }) {
           </li>
         ))}
       </ul>
-      {isNoteOpened ? <NoteModal note={note} clicked={clicked} /> : null}
+      {isNoteOpened ? <NoteModal note={note} clicked={clicked} deleteNote={deleteNote} archiveNote={archiveNote} /> : null}
     </li>
   );
 }
