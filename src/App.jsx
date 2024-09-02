@@ -1,33 +1,36 @@
-import React, { useEffect, useRef } from "react";
-import { DisplayNotes, Header } from "./components";
+import React, { useEffect } from "react";
+import { Header } from "./components";
 import dataService from "./appwrite/config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFullData, setRenderData } from "./store/noteSlice";
-import { setReference } from "./store/referenceSlice";
-
-const data = {
-  Title: "Hello",
-  Content: "df iu iu yvuj hvtv uyiug hj gv yuv hjjkv kyvhmn jkb hk byu vjk",
-}
+import { Outlet, useNavigate } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.auth.status);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const notes = await dataService.getAllNotes();
-      dispatch(setFullData({ noteData: notes }))
-      dispatch(setRenderData({ noteData: notes }))
+      if (authStatus) {
+        const notes = await dataService.getAllNotes();
+        const myNotes = notes.filter(item => !item.isArchived && !item.isTrashed);
+        dispatch(setFullData({ noteData: notes }));
+        dispatch(setRenderData({ noteData: myNotes }));
+      } else {
+        navigate("/login");
+      }
     };
 
     fetchNotes();
-    
-  }, [dispatch]);
+  }, [dispatch, authStatus, navigate]);
 
   return (
-    <div className="text-text-paragraph bg-gray-950 flex-col justify-center items-center h-screen w-screen">
+    <div className="text-text-paragraph bg-gray-950 min-h-screen w-screen overflow-y-auto">
       <Header />
-      <DisplayNotes />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

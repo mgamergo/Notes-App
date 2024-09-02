@@ -11,7 +11,7 @@ function AddButton() {
 
   return (
     <div>
-      <button className="bg-green-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-green-700 hover:text-white"
+      <button className="bg-green-700 text-white px-4 py-2 rounded-md transition-all duration-300 hover:bg-green-900 hover:text-text-paragraph"
         onClick={addNoteButtonClick}
       >
         Add Note

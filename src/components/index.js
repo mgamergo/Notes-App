@@ -9,6 +9,7 @@ import OpenNote from "./OpenNote";
 import Login from "./Login";
 import Signup from "./Signup";
 import DisplayNotes from "./DisplayNotes";
+import NoteModal from "./NoteModal";
 
 export {
   AddButton,
@@ -22,4 +23,5 @@ export {
   Login,
   Signup,
   DisplayNotes,
+  NoteModal
 };

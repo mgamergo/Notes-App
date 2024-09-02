@@ -1,6 +1,12 @@
 import React, { useState, useRef } from 'react';
+import authService from '../../appwrite/auth';
+import { useDispatch } from 'react-redux';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { logout } from '../../store/authSlice';
 
 const Profile = () => {
+  const dispatch = useDispatch()
+
   // State to manage the visibility of the menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -27,23 +33,25 @@ const Profile = () => {
     };
   }, []);
 
+  const submit = () => {
+    authService.logout()
+    dispatch(logout())
+    
+  }
+
   return (
     <div className="relative inline-block" ref={menuRef}>
       {/* Avatar Image */}
-      <img 
-        src="avatar.png" 
-        alt="Avatar" 
-        className="w-10 h-10 rounded-full cursor-pointer" 
-        onClick={toggleMenu} 
-      />
+      <AccountCircleIcon sx={{fontSize:"3rem", cursor: "pointer"}} onClick={toggleMenu}/> 
 
       {/* Conditional rendering of the menu */}
       {isMenuOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
-          <p className="text-center text-gray-700 px-4 py-2">Hello, User!</p>
+        <div className="absolute right-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg py-2 z-50">
+          <p className="text-center text-text-paragraph px-4 py-2">Hello, User!</p>
           <button 
-            className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 focus:bg-gray-100"
+            className="block m-auto mt-3 text-left px-4 py-2 text-white rounded-md bg-red-700 hover:bg-red-400 focus:bg-red-400"
             id="logout-button"
+            onClick={submit}
           >
             Logout
           </button>

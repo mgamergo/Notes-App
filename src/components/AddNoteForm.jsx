@@ -7,8 +7,8 @@ import { makeInvisible } from "../store/addNoteDisplaySlice";
 
 function AddNoteForm() {
   const dispatch = useDispatch();
-  const renderData = useSelector((state) => state.note.renderData);
   const fullData = useSelector((state) => state.note.fullData);
+  const userId = useSelector(state => state.auth.userData)
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -35,7 +35,7 @@ function AddNoteForm() {
         dispatch(makeInvisible());
 
         // Update Redux state and trigger re-render
-        const updatedData = [...fullData, { ...data, $id: $id }];
+        const updatedData = [...fullData, { ...data, $id: $id, userId: userId }];
         dispatch(setFullData({noteData: updatedData}));
         dispatch(setRenderData({noteData: updatedData}));
 
@@ -74,7 +74,7 @@ function AddNoteForm() {
           <button type="submit" className="bg-green-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-green-700 hover:text-white cursor-pointer">
             Add
           </button>
-          <butoon type='button' onClick = {cancel} className="bg-red-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-red-700 hover:text-white cursor-pointer">Cancel</butoon>
+          <button type='button' onClick = {cancel} className="bg-red-900 px-4 py-2 rounded-md transition-all duration-300 hover:bg-red-700 hover:text-white cursor-pointer">Cancel</button>
         </div>
 
       </form>

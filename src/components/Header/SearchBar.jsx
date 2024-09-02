@@ -34,7 +34,7 @@ function SearchBar() {
         type='search'
         onChange={search}
         placeholder='Search notes...'
-        className='bg-gray-900 w-96 h-10 p-3'
+        className='bg-gray-900 w-96 h-10 p-3 rounded-sm'
       />
     </div>
   );
