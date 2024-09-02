@@ -1,9 +1,30 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import CloseIcon from '@mui/icons-material/Close';
+import React from "react";
+import { motion } from "framer-motion";
+import CloseIcon from "@mui/icons-material/Close";
+import dataService from "../appwrite/config";
+import { useDispatch, useSelector } from "react-redux";
+import { setFullData, setRenderData } from "../store/noteSlice";
 
-function NoteModal({ note, onClose }) {
-  const { Title, Content, Color = '#030712', tags = [] } = note;
+function NoteModal({ note, clicked }) {
+  const { $id, Title, Content, Color = "#030712", tags = [] } = note;
+  const noteData = useSelector(state => state.note.fullData)
+  const renderNoteData = useSelector(state => state.note.renderData)
+  const dispatch = useDispatch()
+
+  const close = (e) => {
+    e.stopPropagation();
+    clicked();
+  };
+
+  const deleteClicked = async () => {
+    const result = await dataService.deleteNote($id)
+    if (result) {
+      const newData = noteData.filter(item => item.$id != $id)
+      const newRenderData = renderNoteData.filter(item => item.$id != $id)
+      dispatch(setFullData({noteData: newData}))
+      dispatch(setRenderData({noteData: newRenderData}))
+    }
+  }
 
   return (
     <motion.div
@@ -16,12 +37,12 @@ function NoteModal({ note, onClose }) {
         className="bg-gray-900 p-8 rounded-lg text-white max-w-lg w-full relative"
         style={{ backgroundColor: Color }}
       >
-        <button
+        {/* <button
           className="absolute top-2 right-2"
-          onClick={onClose}
+          onClick={close}
         >
           <CloseIcon className="text-white" />
-        </button>
+        </button> */}
         <h2 className="text-2xl font-bold mb-4">{Title}</h2>
         <p className="text-lg mb-6">{Content}</p>
         <ul className="flex gap-2 flex-wrap">
@@ -34,6 +55,16 @@ function NoteModal({ note, onClose }) {
             </li>
           ))}
         </ul>
+        <div className="w-full flex justify-center items-center gap-3">
+          <button className="bg-green-900 w-20 text-white inline-flex justify-center py-2 rounded-md transition-all duration-300 hover:bg-green-700 hover:text-text-paragraph">
+            Edit
+          </button>
+          <button className="inline-flex justify-center w-20 text-left py-2 text-white rounded-md bg-red-900 hover:bg-red-700 focus:bg-red-700"
+            onClick={deleteClicked}
+          >
+            Delete
+          </button>
+        </div>
       </motion.div>
     </motion.div>
   );

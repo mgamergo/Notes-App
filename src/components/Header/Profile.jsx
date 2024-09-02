@@ -3,6 +3,9 @@ import authService from '../../appwrite/auth';
 import { useDispatch } from 'react-redux';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { logout } from '../../store/authSlice';
+import { makeInvisible } from '../../store/addNoteDisplaySlice';
+import { setCategory } from '../../store/noteCategorySlice';
+import { resetData } from '../../store/noteSlice';
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -33,9 +36,12 @@ const Profile = () => {
     };
   }, []);
 
-  const submit = () => {
-    authService.logout()
+  const submit = async () => {
     dispatch(logout())
+    dispatch(makeInvisible())
+    dispatch(setCategory('My Notes'))
+    dispatch(resetData())
+    await authService.logout()
     
   }
 

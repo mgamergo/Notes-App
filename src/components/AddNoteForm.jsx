@@ -28,14 +28,14 @@ function AddNoteForm() {
 
   const submit = async (data) => {
     try {
-      const addNote = await dataService.addNote(data);
+      const addNote = await dataService.addNote({...data, userId: userId});
 
       if (addNote) {     
         const {$id} = addNote   
         dispatch(makeInvisible());
 
         // Update Redux state and trigger re-render
-        const updatedData = [...fullData, { ...data, $id: $id, userId: userId }];
+        const updatedData = [...fullData, { ...data, $id: $id }];
         dispatch(setFullData({noteData: updatedData}));
         dispatch(setRenderData({noteData: updatedData}));
 

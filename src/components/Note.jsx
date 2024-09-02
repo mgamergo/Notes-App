@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import {NoteModal} from './index'
 
 function Note({ note }) {
+  const [isNoteOpened, setIsNoteOpened] = useState(false)
   const { $id, Title, Content, Color = "#030712", tags = [], isArchived, isTrashed, userId } = note;
 
   const clicked = () => {
-    console.log($id)
-    console.log(userId)
+    setIsNoteOpened(prev => !prev)
   }
 
   return (
@@ -35,6 +36,7 @@ function Note({ note }) {
           </li>
         ))}
       </ul>
+      {isNoteOpened ? <NoteModal note={note} clicked={clicked} /> : null}
     </li>
   );
 }

@@ -18,7 +18,7 @@ function Signup() {
     }
   }, [isAuthenticated, navigate]);
   
-  const submit = async (data) => {
+  const submit = async (data) => {    
     const result = await authService.signUp(data)
     dispatch(login({userData: result.userId, sessionId: result.$id}))
   }

@@ -21,6 +21,7 @@ export class DataService {
     tags = [],
     isArchived = false,
     isTrashed = false,
+    userId
   }) {
     try {
       const result = await this.databases.createDocument(
@@ -34,6 +35,7 @@ export class DataService {
           tags,
           isArchived,
           isTrashed,
+          userId
         }
       );
       return result;
@@ -44,14 +46,14 @@ export class DataService {
 
   async updateNote(
     $id,
-    { Title, Content, Color, tags, isArchived, isTrashed }
+    { Title, Content, Color, tags, isArchived, isTrashed, userId }
   ) {
     try {
       const result = await this.databases.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         $id,
-        { Title, Content, Color, tags, isArchived, isTrashed }
+        { Title, Content, Color, tags, isArchived, isTrashed, userId }
       );
       return result;
     } catch (error) {
@@ -85,12 +87,13 @@ export class DataService {
     }
   }
 
-  async getAllNotes(query = []) {
+  async getAllNotes(userId) {
     try {
+      const query = [Query.equal("userId", userId)];
       const response = await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        query
+        query,
       );
       return response.documents;
     } catch (error) {

@@ -8,12 +8,13 @@ import { Outlet, useNavigate } from "react-router-dom";
 function App() {
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.status);
+  const userId = useSelector(state => state.auth.userData)
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNotes = async () => {
       if (authStatus) {
-        const notes = await dataService.getAllNotes();
+        const notes = await dataService.getAllNotes(userId);
         const myNotes = notes.filter(item => !item.isArchived && !item.isTrashed);
         dispatch(setFullData({ noteData: notes }));
         dispatch(setRenderData({ noteData: myNotes }));

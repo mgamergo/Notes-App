@@ -15,9 +15,13 @@ const noteSlice = createSlice({
     setRenderData: (state, action) => {
       state.renderData = action.payload.noteData;
     },
+    resetData: (state, action) => {
+      state.fullData = []
+      state.renderData = []
+    }
   },
 });
 
-export const { setFullData, setRenderData } = noteSlice.actions;
+export const { setFullData, setRenderData, resetData } = noteSlice.actions;
 
 export default noteSlice.reducer;
