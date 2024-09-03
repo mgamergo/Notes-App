@@ -23,28 +23,28 @@ const noteSlice = createSlice({
     setDelete: (state, action) => {
       state.fullData.map(async (item) => {
         if(item.$id === action.payload.$id) {
-          item.isTrashed = true
-          await dataService.updateNote(action.payload.$id, {...item, isTrashed: true})
+          item.isTrashed = !item.isTrashed
+          await dataService.updateNote(action.payload.$id, {...item, isTrashed: !item.isTrashed})
         }
       })
       state.renderData.map(async (item) => {
         if(item.$id === action.payload.$id) {
-          item.isTrashed = true
-          await dataService.updateNote(action.payload.$id, {...item, isTrashed: true})
+          item.isTrashed = !item.isTrashed
+          await dataService.updateNote(action.payload.$id, {...item, isTrashed: !item.isTrashed})
         }
       })
     },
     setArchive: (state, action) => {
       state.fullData.map(async (item) => {
         if(item.$id === action.payload.$id){
-           item.isArchived = true
-           await dataService.updateNote(action.payload.$id, {...item, isArchived: true})
+           item.isArchived = !item.isArchived
+           await dataService.updateNote(action.payload.$id, {...item, isArchived: !item.isArchived})
           }
       })
       state.renderData.map(async (item) => {
         if(item.$id === action.payload.$id) {
-          item.isArchived = true
-          await dataService.updateNote(action.payload.$id, {...item, isArchived: true})
+          item.isArchived = !item.isArchived
+          await dataService.updateNote(action.payload.$id, {...item, isArchived: !item.isArchived})
         }
       })
     },

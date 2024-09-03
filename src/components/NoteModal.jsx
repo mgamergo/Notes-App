@@ -1,15 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import CloseIcon from "@mui/icons-material/Close";
-import dataService from "../appwrite/config";
-import { useDispatch, useSelector } from "react-redux";
-import { setFullData, setRenderData } from "../store/noteSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
 
 function NoteModal({ note, clicked, deleteNote, archiveNote }) {
-  const { $id, Title, Content, Color = "#030712", tags = [] } = note;
-  const noteData = useSelector(state => state.note.fullData)
-  const renderNoteData = useSelector(state => state.note.renderData)
-  const dispatch = useDispatch()
+  const { Title, Content, Color = "#030712", tags = [], isArchived, isTrashed } = note;
 
   const close = (e) => {
     e.stopPropagation();
@@ -58,18 +55,15 @@ function NoteModal({ note, clicked, deleteNote, archiveNote }) {
           ))}
         </ul>
         <div className="w-full flex justify-center items-center gap-3">
-          <button className="bg-green-900 w-20 text-white inline-flex justify-center py-2 rounded-md transition-all duration-300 hover:bg-green-700 hover:text-text-paragraph">
-            Edit
-          </button>
           <button className="inline-flex justify-center w-20 text-left py-2 text-white rounded-md bg-blue-900 hover:blue-red-700 focus:bg-blue-700"
             onClick={archiveClicked}
           >
-            Archive
+            {!isArchived ? <ArchiveIcon /> : <UnarchiveIcon />}
           </button>
           <button className="inline-flex justify-center w-20 text-left py-2 text-white rounded-md bg-red-900 hover:bg-red-700 focus:bg-red-700"
             onClick={deleteClicked}
           >
-            Delete
+            {!isTrashed ? <DeleteIcon /> : <RestoreFromTrashIcon />}
           </button>
         </div>
       </motion.div>
