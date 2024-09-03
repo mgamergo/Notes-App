@@ -10,31 +10,27 @@ function SearchBar() {
 
   const search = async (e) => {
     const searchQuery = e.target.value;
-    if (searchQuery && searchQuery !== '') { 
+    if (searchQuery && searchQuery !== '') {
       const query = [
         Query.search('Title', searchQuery),
         Query.search('Content', searchQuery)
       ];
       const result = await dataService.getAllNotes(query);
       console.log('Search results:', result);
-      
-      // Dispatch the search result with the correct payload structure
       dispatch(setRenderData({ noteData: result }));
     } else {
-      // Reset to all notes with the correct payload structure
       dispatch(setRenderData({ noteData: notes }));
       console.log('All notes:', notes);
-      console.log('I ran');
     }
   };
 
   return (
-    <div>
-      <input 
+    <div className="w-full md:w-auto">
+      <input
         type='search'
         onChange={search}
         placeholder='Search notes...'
-        className='bg-gray-900 w-96 h-10 p-3 rounded-sm'
+        className='bg-gray-900 w-full md:w-96 h-10 p-3 rounded-sm'
       />
     </div>
   );
