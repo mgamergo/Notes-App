@@ -3,7 +3,7 @@ import { Sidebar, DisplayNotes } from "../components";
 
 function Homepage() {
   return (
-    <div className="flex mt-5 h-screen">
+    <div className="flex h-screen">
       <Sidebar />
       <DisplayNotes />
     </div>

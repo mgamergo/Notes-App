@@ -29,8 +29,8 @@ function Header() {
         </Link>
       </div>
 
-      {/* Search Icon and Hamburger Menu for Small/Medium Screens */}
-      <div className="flex items-center gap-3 md:hidden">
+      {/* Right Section (Search Icon and Hamburger Menu) */}
+      <div className="flex-grow flex items-center justify-end md:hidden gap-3">
         {/* Search Icon */}
         {authStatus && (
           <SearchIcon
@@ -41,11 +41,13 @@ function Header() {
         )}
 
         {/* Hamburger Menu Icon */}
-        <MenuIcon
-          fontSize="large"
-          className="cursor-pointer text-white"
-          onClick={toggleMenu}
-        />
+        {authStatus && (
+          <MenuIcon
+            fontSize="large"
+            className="cursor-pointer text-white"
+            onClick={toggleMenu}
+          />
+        )}
       </div>
 
       {/* Search Bar: Visible on large screens or when toggled */}
@@ -53,25 +55,28 @@ function Header() {
         {authStatus && <SearchBar />}
       </div>
 
-      {/* Auth Links and Profile Section - Hidden on small/medium devices, visible on large */}
-      <div className={`md:flex items-center gap-4 md:gap-8 ${isMenuOpen ? 'flex' : 'hidden'} flex-col md:flex-row`}>
+      {/* Auth Links and Profile Section */}
+      <div className="flex items-center gap-4 md:gap-8">
         {!authStatus ? (
-          <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex items-center gap-4">
             <Link to='/login'>
-              <button className="px-4 py-2 rounded-md border font-bold transition-all duration-300 border-green-700 hover:bg-gray-900 w-full md:w-auto">
+              <button className="px-4 py-2 rounded-md border font-bold transition-all duration-300 border-green-700 hover:bg-gray-900">
                 Log In
               </button>
             </Link>
             <Link to='/signup'>
-              <button className="px-4 py-2 rounded-md font-bold transition-all duration-300 bg-green-700 hover:bg-green-900 hover:text-text-paragraph w-full md:w-auto">
+              <button className="px-4 py-2 rounded-md font-bold transition-all duration-300 bg-green-700 hover:bg-green-900 hover:text-text-paragraph">
                 Sign Up
               </button>
             </Link>
           </div>
         ) : (
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <AddButton />
-            <Profile />
+          <div className="flex items-center gap-4 md:gap-8">
+            {/* Hamburger Menu: Visible only when logged in */}
+            <div className={`flex-col md:flex-row ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
+              <AddButton />
+              <Profile />
+            </div>
           </div>
         )}
       </div>

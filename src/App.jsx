@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="text-text-paragraph bg-gray-950 min-h-screen w-screen overflow-y-auto flex flex-col">
       <Header />
-      <main className="flex-1 p-4 md:p-8 lg:p-12">
+      <main>
         <Outlet />
       </main>
     </div>

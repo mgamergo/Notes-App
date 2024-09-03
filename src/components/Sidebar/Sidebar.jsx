@@ -33,8 +33,8 @@ function Sidebar() {
   };
 
   return (
-    <div>
-      <div className="hidden md:flex md:flex-col w-60 bg-gray-900 h-full fixed">
+    <div className='relative'>
+      <div className="hidden md:flex md:flex-col w-60 bg-gray-900 h-full absolute top-0">
         <ul className="w-full p-4 my-2 bg-gray-900">
           <li
             className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'My Notes' ? 'bg-gray-700' : ''}`}

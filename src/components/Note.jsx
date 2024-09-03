@@ -24,7 +24,7 @@ function Note({ note }) {
   return (
     <li
       style={{ backgroundColor: Color }}
-      className={`text-white p-5 py-8 pb-3 rounded-lg flex-col justify-center items-center max-w-60  border border-gray-500 list-none hover:shadow-slate-800 hover:shadow-lg`}
+      className={`text-white p-5 py-8 pb-3 rounded-lg flex-col justify-center items-center  border border-gray-500 list-none hover:shadow-slate-800 hover:shadow-lg`}
       onClick={clicked}
     >
       <h3 className="text-lg font-bold pb-5 text-white">{Title}</h3>
