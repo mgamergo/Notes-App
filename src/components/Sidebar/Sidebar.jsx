@@ -37,21 +37,21 @@ function Sidebar() {
       <div className="hidden md:flex md:flex-col w-60 bg-gray-900 h-full absolute top-0">
         <ul className="w-full p-4 my-2 bg-gray-900">
           <li
-            className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'My Notes' ? 'bg-gray-700' : ''}`}
+            className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'My Notes' ? 'bg-gray-700 rounded-md' : ''}`}
             onClick={() => setActiveItem('My Notes')}
           >
             <DescriptionIcon sx={{ fontSize: '1.5rem' }} />
             <p className="pl-5 text-md font-bold">My Notes</p>
           </li>
           <li
-            className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'Archived' ? 'bg-gray-700' : ''}`}
+            className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'Archived' ? 'bg-gray-700 rounded-md' : ''}`}
             onClick={() => setActiveItem('Archived')}
           >
             <ArchiveIcon sx={{ fontSize: '1.5rem' }} />
             <p className="pl-5 text-md font-bold">Archived</p>
           </li>
           <li
-            className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'Trashed' ? 'bg-gray-700' : ''}`}
+            className={`flex items-center mb-2 cursor-pointer p-3 rounded-md ${activeItem === 'Trashed' ? 'bg-gray-700 rounded-md' : ''}`}
             onClick={() => setActiveItem('Trashed')}
           >
             <DeleteIcon sx={{ fontSize: '1.5rem' }} />
@@ -62,21 +62,21 @@ function Sidebar() {
       
       <div className="md:hidden flex justify-around bg-gray-900 p-2 fixed bottom-0 w-full">
         <button
-          className={`flex items-center p-2 ${activeItem === 'My Notes' ? 'bg-gray-700' : ''}`}
+          className={`flex items-center p-2 ${activeItem === 'My Notes' ? 'bg-gray-700 rounded-md' : ''}`}
           onClick={() => setActiveItem('My Notes')}
         >
           <DescriptionIcon sx={{ fontSize: '1.5rem' }} />
           <p className="pl-2 text-sm">My Notes</p>
         </button>
         <button
-          className={`flex items-center p-2 ${activeItem === 'Archived' ? 'bg-gray-700' : ''}`}
+          className={`flex items-center p-2 ${activeItem === 'Archived' ? 'bg-gray-700 rounded-md' : ''}`}
           onClick={() => setActiveItem('Archived')}
         >
           <ArchiveIcon sx={{ fontSize: '1.5rem' }} />
           <p className="pl-2 text-sm">Archived</p>
         </button>
         <button
-          className={`flex items-center p-2 ${activeItem === 'Trashed' ? 'bg-gray-700' : ''}`}
+          className={`flex items-center p-2 ${activeItem === 'Trashed' ? 'bg-gray-700 rounded-md' : ''}`}
           onClick={() => setActiveItem('Trashed')}
         >
           <DeleteIcon sx={{ fontSize: '1.5rem' }} />
